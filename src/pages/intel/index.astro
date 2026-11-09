@@ -2,8 +2,8 @@
 import Base from '../../layouts/Base.astro';
 import Tags from '../../components/Tags.astro';
 import { getCollection } from 'astro:content';
-import { fmt, published } from '../../utils';
-const items = (await getCollection('intel', published)).sort((a: any, b: any) => +b.data.date - +a.data.date);
+import { fmt, published, byDropDesc } from '../../utils';
+const items = (await getCollection('intel', published)).sort(byDropDesc);
 ---
 <Base title="Threat Intelligence" description="Threat actor profiles, campaign analysis and advisories, mapped to MITRE ATT&CK. Shared at TLP:CLEAR.">
   <p class="eyebrow">Threat Intelligence</p>
