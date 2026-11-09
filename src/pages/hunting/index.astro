@@ -5,10 +5,11 @@ import { getCollection } from 'astro:content';
 import { fmt, published, byDropDesc } from '../../utils';
 const items = (await getCollection('hunts', published)).sort(byDropDesc);
 ---
-<Base title="Threat Hunting" description="Hypothesis-driven hunts with queries in KQL, SPL and Sigma. Full query library on GitHub.">
+<Base title="Threat Hunting" description="Hypothesis-driven hunts with queries in KQL and CrowdStrike CQL. New Hunt Drops every Monday, Wednesday and Friday.">
   <p class="eyebrow">Threat Hunting</p>
   <h1>Threat Hunting</h1>
-  <p class="lead">Hypothesis-driven hunts with queries in KQL, SPL and Sigma. Full query library on GitHub.</p>
+  <p class="lead">Hypothesis-driven hunts with queries in KQL and CrowdStrike CQL. Shared at TLP:CLEAR.</p>
+  <p class="meta">New Hunt Drops every Monday, Wednesday and Friday</p>
   <section class="section">
     {items.length ? (
       <div class="grid">

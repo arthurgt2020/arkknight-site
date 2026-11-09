@@ -5,10 +5,11 @@ import { getCollection } from 'astro:content';
 import { fmt, published, byDropDesc } from '../../utils';
 const items = (await getCollection('intel', published)).sort(byDropDesc);
 ---
-<Base title="Threat Intelligence" description="Threat actor profiles, campaign analysis and advisories, mapped to MITRE ATT&CK. Shared at TLP:CLEAR.">
+<Base title="Threat Intelligence" description="Threat actor profiles, campaign analysis and advisories, mapped to MITRE ATT&CK. New Intel Drops every Tuesday, Thursday and Saturday.">
   <p class="eyebrow">Threat Intelligence</p>
   <h1>Threat Intelligence</h1>
   <p class="lead">Threat actor profiles, campaign analysis and advisories, mapped to MITRE ATT&CK. Shared at TLP:CLEAR.</p>
+  <p class="meta">New Intel Drops every Tuesday, Thursday and Saturday</p>
   <section class="section">
     {items.length ? (
       <div class="grid">
