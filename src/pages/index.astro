@@ -25,7 +25,7 @@ const hunts = (await getCollection('hunts', published)).sort(byDate).slice(0, 3)
         <a class="card" href={`/projects/${p.id}/`}>
           <h3>{p.data.title}</h3>
           <p>{p.data.summary}</p>
-          <Tags tags={p.data.stack} />
+          <Tags tags={p.data.stack} link={false} />
         </a>
       ))}
     </div>
@@ -40,7 +40,7 @@ const hunts = (await getCollection('hunts', published)).sort(byDate).slice(0, 3)
             <span class="meta">{i.data.type} · {fmt(i.data.date)}</span>
             <h3>{i.data.title}</h3>
             <p>{i.data.summary}</p>
-            <Tags attack={i.data.attack} />
+            <Tags attack={i.data.attack} link={false} />
           </a>
         ))}
       </div>
@@ -56,7 +56,7 @@ const hunts = (await getCollection('hunts', published)).sort(byDate).slice(0, 3)
             <span class="meta">{h.data.status} · {fmt(h.data.date)}</span>
             <h3>{h.data.title}</h3>
             <p>{h.data.hypothesis}</p>
-            <Tags attack={h.data.attack} tags={h.data.languages} />
+            <Tags attack={h.data.attack} tags={h.data.languages} link={false} />
           </a>
         ))}
       </div>
