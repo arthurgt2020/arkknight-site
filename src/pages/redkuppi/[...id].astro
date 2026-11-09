@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import Tags from '../../components/Tags.astro';
+import { getCollection, render } from 'astro:content';
+import { fmt, published } from '../../utils';
+
+export async function getStaticPaths() {
+  const items = await getCollection('redkuppi', published);
+  return items.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+<Base title={`RedKuppi #${d.episode}: ${d.title}`} description={d.summary}>
+  <article class="prose">
+    <p class="eyebrow"><a href="/redkuppi/">← RedKuppi</a></p>
+    <h1>#{d.episode} · {d.title}</h1>
+    <p class="meta">{fmt(d.publishDate)}</p>
+    {d.youtubeId && (
+      <div class="video">
+        <iframe src={`https://www.youtube-nocookie.com/embed/${d.youtubeId}`} title={d.title} loading="lazy"
+          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    )}
+    <Content />
+    {d.links.length > 0 && (
+      <p>Watch on: {d.links.map((l, i) => <>{i > 0 && ' · '}<a href={l.url} target="_blank" rel="noopener">{l.platform}</a></>)}</p>
+    )}
+    <Tags tags={d.tags} />
+  </article>
+</Base>

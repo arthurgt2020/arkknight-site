@@ -1,0 +1,6 @@
+title: Post title
+platforms: [linkedin, x]
+scheduledAt: 2026-11-10T09:00:00+04:00
+status: draft          # draft | approved | scheduled | published
+campaign: redkuppi
+sourceRef: redkuppi/ep-01

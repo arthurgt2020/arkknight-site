@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { fmt, published } from '../../utils';
+
+export async function getStaticPaths() {
+  const items = await getCollection('weekly', published);
+  return items.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props as any;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+<Base title={d.title} description={d.summary}>
+  <article class="prose">
+    <p class="eyebrow"><a href="/weekly/">← CTI weekly</a></p>
+    <h1>{d.title}</h1>
+    <p class="meta">{d.region} · TLP:{d.tlp} · {fmt(d.periodStart)} – {fmt(d.periodEnd)}{d.threatLevel && ` · Threat level ${d.threatLevel}`}{d.pages && ` · ${d.pages} pages`}</p>
+    <p class="lead">{d.summary}</p>
+    <Content />
+    <p>
+      {d.pdf && <a href={d.pdf}>Download the PDF →</a>}
+      {d.pdf && d.linkedinUrl && ' · '}
+      {d.linkedinUrl && <a href={d.linkedinUrl} target="_blank" rel="noopener">View on LinkedIn →</a>}
+    </p>
+  </article>
+</Base>

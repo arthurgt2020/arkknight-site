@@ -1,0 +1,11 @@
+---
+interface Props { tags?: string[]; attack?: string[] }
+const { tags = [], attack = [] } = Astro.props;
+const attackUrl = (t: string) => `https://attack.mitre.org/techniques/${t.replace('.', '/')}/`;
+---
+{(tags.length > 0 || attack.length > 0) && (
+  <div class="tags">
+    {attack.map((t) => <a class="tag attack" href={attackUrl(t)} target="_blank" rel="noopener">{t}</a>)}
+    {tags.map((t) => <span class="tag">{t}</span>)}
+  </div>
+)}
