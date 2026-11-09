@@ -88,7 +88,7 @@ const hunts = defineCollection({
     drop: z.number().int().optional(),
     risk: risk.optional(),
     linkedinUrl: z.string().url().optional(),
-    status: z.enum(['draft', 'validated', 'retired']).default('draft'),
+    status: z.enum(['draft', 'published', 'validated', 'retired']).default('published'),
     date: z.coerce.date(),
     draft: z.boolean().default(false),
   }),

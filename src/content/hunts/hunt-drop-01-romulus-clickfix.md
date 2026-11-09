@@ -2,7 +2,7 @@
 title: "Hunt Drop 01 | ROMULUS ClickFix chain"
 hypothesis: "The behaviours described in the Intel Drop on this topic (ROMULUS ClickFix chain) are present in our telemetry."
 drop: 1
-status: draft
+status: published
 date: 2026-10-21
 ---
 

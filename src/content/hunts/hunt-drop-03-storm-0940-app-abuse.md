@@ -2,7 +2,7 @@
 title: "Hunt Drop 03 | Storm-0940 multi-tenant app abuse"
 hypothesis: "The behaviours described in the Intel Drop on this topic (Storm-0940 multi-tenant app abuse) are present in our telemetry."
 drop: 3
-status: draft
+status: published
 date: 2026-10-23
 ---
 
