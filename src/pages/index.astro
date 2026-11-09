@@ -2,12 +2,12 @@
 import Base from '../layouts/Base.astro';
 import Tags from '../components/Tags.astro';
 import { getCollection } from 'astro:content';
-import { fmt, published } from '../utils';
+import { fmt, published, byDropDesc } from '../utils';
 
 const byDate = (a: any, b: any) => +b.data.date - +a.data.date;
 const projects = (await getCollection('projects')).filter((p) => p.data.featured).sort(byDate).slice(0, 3);
-const intel = (await getCollection('intel', published)).sort(byDate).slice(0, 3);
-const hunts = (await getCollection('hunts', published)).sort(byDate).slice(0, 3);
+const intel = (await getCollection('intel', published)).sort(byDropDesc).slice(0, 3);
+const hunts = (await getCollection('hunts', published)).sort(byDropDesc).slice(0, 3);
 ---
 <Base>
   <p class="eyebrow">Threat Intelligence · Threat Hunting · Automation</p>
