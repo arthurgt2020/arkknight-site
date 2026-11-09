@@ -6,7 +6,7 @@ dataSources: [AWS CloudTrail (Defender / NG-SIEM), EDR]
 languages: [KQL]
 drop: 9
 risk: { likelihood: 3, impact: 4 }
-status: draft
+status: published
 date: 2026-11-04
 ---
 

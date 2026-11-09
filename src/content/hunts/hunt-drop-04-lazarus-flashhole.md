@@ -2,7 +2,7 @@
 title: "Hunt Drop 04 | Lazarus FlashHole"
 hypothesis: "The behaviours described in the Intel Drop on this topic (Lazarus FlashHole) are present in our telemetry."
 drop: 4
-status: draft
+status: published
 date: 2026-10-23
 ---
 

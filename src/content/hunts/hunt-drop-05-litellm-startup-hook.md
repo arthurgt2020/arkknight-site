@@ -2,7 +2,7 @@
 title: "Hunt Drop 05 | LiteLLM startup-hook stealer"
 hypothesis: "The behaviours described in the Intel Drop on this topic (LiteLLM startup-hook stealer) are present in our telemetry."
 drop: 5
-status: draft
+status: published
 date: 2026-10-26
 ---
 

@@ -2,7 +2,7 @@
 title: "Hunt Drop 06 | Teams fake IT Support"
 hypothesis: "The behaviours described in the Intel Drop on this topic (Teams fake IT Support) are present in our telemetry."
 drop: 6
-status: draft
+status: published
 date: 2026-10-28
 ---
 

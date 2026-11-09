@@ -6,7 +6,7 @@ dataSources: [EDR process events, Network events, DNS events]
 languages: [KQL, CQL]
 drop: 10
 risk: { likelihood: 4, impact: 4 }
-status: draft
+status: published
 date: 2026-11-06
 ---
 
