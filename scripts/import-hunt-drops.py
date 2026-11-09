@@ -27,6 +27,13 @@ META = {
              hyp='Run-box PowerShell leads to a silent MSI or passworded 7-Zip, then a loader on the host.',
              risk=(3, 4), conf=('HIGH', 'MEDIUM'),
              ds=['Process events', 'Image-load events', 'File events', 'Registry events']),
+    2:  dict(date=None, title='PHP2Shell: hunt PHP workers gone rogue', intel=5,
+             hyp='A PHP web worker has been turned into a shell on the host.',
+             risk=(4, 5), conf=('', ''), conf_text='Hunt logic sourced: HIGH.',
+             kql_file='hunt-drop-02-php2shell.kql', cql_file='hunt-drop-02-php2shell.cql',
+             sources_from_comment=True, post_heading='## The nine hunts\n\n',
+             attack=['T1059.004', 'T1059', 'T1033', 'T1505.003', 'T1071', 'T1053.003'],
+             ds=['Web server and PHP worker process events', 'File events', 'Network events']),
     3:  dict(date='2026-10-23', title="When your MSP's app becomes the attacker", intel=10,
              hyp='A stolen app credential signs in app-only, then grants itself roles and credentials.',
              risk=(3, 5), conf=('HIGH', 'MEDIUM'),
@@ -174,13 +181,13 @@ def build(drop):
     md_path = (glob.glob(os.path.join(SRC, 'hunt-drop-%02d-20*.md' % drop)) or [None])[0]
     kit = os.path.join(SRC, 'hunt-drop-%02d-linkedin-posting-kit.md' % drop)
     md = read(md_path) if md_path else read(kit)
-    post = fenced_after(md, r'^##\s*\d*\.?\s*LinkedIn post')
+    post = fenced_after(md, r'^##\s*\d*\.?\s*(?:Draft )?LinkedIn post')
     if not post:
         raise SystemExit('Drop %d: no LinkedIn post block found' % drop)
 
     kql = cql = None
-    kf = os.path.join(SRC, 'hunt-drop-%02d-defender.kql' % drop)
-    cf = os.path.join(SRC, 'hunt-drop-%02d-falcon-cql.txt' % drop)
+    kf = os.path.join(SRC, meta.get('kql_file', 'hunt-drop-%02d-defender.kql' % drop))
+    cf = os.path.join(SRC, meta.get('cql_file', 'hunt-drop-%02d-falcon-cql.txt' % drop))
     if os.path.exists(kf):
         kql = read(kf).strip()
     if os.path.exists(cf):
@@ -202,6 +209,7 @@ def build(drop):
     for t in re.findall(r'\bT\d{4}(?:\.\d{3})?\b', post):
         if t not in attack:
             attack.append(t)
+    attack = meta.get('attack') or attack
     likelihood, impact = meta['risk']
     score = likelihood * impact
 
@@ -213,10 +221,11 @@ def build(drop):
             body.append('Builds on [Intel Drop %d](/intel/%s/).' % (meta['intel'], sid))
         else:
             body.append('Builds on Intel Drop %d.' % meta['intel'])
-    body.append(post_to_markdown(post))
-    body.append('**Risk: %d/25 %s** (likelihood %d × impact %d, analyst judgement). '
-                'Intel confidence: %s. Detection fidelity: %s.'
-                % (score, rating(score), likelihood, impact, meta['conf'][0], meta['conf'][1]))
+    body.append(meta.get('post_heading', '') + post_to_markdown(post))
+    conf_text = meta.get('conf_text') or ('Intel confidence: %s. Detection fidelity: %s.'
+                                          % (meta['conf'][0], meta['conf'][1]))
+    body.append('**Risk: %d/25 %s** (likelihood %d × impact %d, analyst judgement). %s'
+                % (score, rating(score), likelihood, impact, conf_text))
     langs = []
     if kql:
         langs.append('KQL')
@@ -227,6 +236,13 @@ def build(drop):
     body.append('Queries are untested: tune before use.')
 
     srcs = parse_sources(md, drop)
+    if meta.get('sources_from_comment'):
+        block = fenced_after(md, r'^#+\s*Comment-ready sources')
+        srcs = []
+        for line in (block or '').split('\n'):
+            m = re.match(r'^\s*\d+\.\s+(.*?):\s+(https?://\S+)\s*$', line)
+            if m:
+                srcs.append('%s: <%s>' % (m.group(1), m.group(2)))
     if not srcs and drop == 1:
         last = comment_blocks(read(kit))[-1]
         for line in last.split('\n'):
@@ -251,7 +267,10 @@ def build(drop):
         m = re.search(r'^linkedinUrl:.*$', read(existing), re.M)
         if m:
             fm.append(m.group(0))
-    fm += ['status: published', 'date: %s' % meta['date'], '---', '']
+    date = meta['date']
+    if not date and existing:
+        date = re.search(r'^date:\s*(.+)$', read(existing), re.M).group(1).strip()
+    fm += ['status: published', 'date: %s' % date, '---', '']
     out = '\n'.join(fm) + '\n' + '\n\n'.join(body) + '\n'
     for old, new in PHRASES.items():
         out = out.replace(old, new)
