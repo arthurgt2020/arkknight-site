@@ -1,11 +1,15 @@
 ---
-interface Props { tags?: string[]; attack?: string[] }
-const { tags = [], attack = [] } = Astro.props;
+// link=false renders ATT&CK tags as plain pills. Use it inside <a class="card">:
+// nested <a> is invalid HTML and makes browsers eject the tags from the card.
+interface Props { tags?: string[]; attack?: string[]; link?: boolean }
+const { tags = [], attack = [], link = true } = Astro.props;
 const attackUrl = (t: string) => `https://attack.mitre.org/techniques/${t.replace('.', '/')}/`;
 ---
 {(tags.length > 0 || attack.length > 0) && (
   <div class="tags">
-    {attack.map((t) => <a class="tag attack" href={attackUrl(t)} target="_blank" rel="noopener">{t}</a>)}
+    {attack.map((t) => link
+      ? <a class="tag attack" href={attackUrl(t)} target="_blank" rel="noopener">{t}</a>
+      : <span class="tag attack">{t}</span>)}
     {tags.map((t) => <span class="tag">{t}</span>)}
   </div>
 )}

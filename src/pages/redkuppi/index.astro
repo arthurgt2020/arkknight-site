@@ -17,7 +17,7 @@ const episodes = (await getCollection('redkuppi', published)).sort((a, b) => b.d
             <span class="meta">Episode {e.data.episode} · {fmt(e.data.publishDate)}</span>
             <h3>{e.data.title}</h3>
             <p>{e.data.summary}</p>
-            <Tags tags={e.data.tags} />
+            <Tags tags={e.data.tags} link={false} />
           </a>
         ))}
       </div>
