@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import Tags from '../components/Tags.astro';
+import { getCollection } from 'astro:content';
+import { fmt, published } from '../utils';
+
+const byDate = (a: any, b: any) => +b.data.date - +a.data.date;
+const projects = (await getCollection('projects')).filter((p) => p.data.featured).sort(byDate).slice(0, 3);
+const intel = (await getCollection('intel', published)).sort(byDate).slice(0, 3);
+const hunts = (await getCollection('hunts', published)).sort(byDate).slice(0, 3);
+---
+<Base>
+  <p class="eyebrow">Threat Intelligence · Threat Hunting · Automation</p>
+  <h1>Arthur Geo Thomas</h1>
+  <p class="lead">
+    Senior Threat Intelligence Analyst based in Dubai. I track threat actors, build hunting content
+    and automate security operations, and share what I learn through write-ups and the RedKuppi Series.
+  </p>
+  <p><a class="btn" href="/about/">About me</a></p>
+
+  <section class="section">
+    <div class="section-head"><h2>Featured projects</h2><a href="/projects/">All projects →</a></div>
+    <div class="grid">
+      {projects.map((p) => (
+        <a class="card" href={`/projects/${p.id}/`}>
+          <h3>{p.data.title}</h3>
+          <p>{p.data.summary}</p>
+          <Tags tags={p.data.stack} />
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Latest intelligence</h2><a href="/intel/">Intel →</a></div>
+    {intel.length ? (
+      <div class="grid">
+        {intel.map((i) => (
+          <a class="card" href={`/intel/${i.id}/`}>
+            <span class="meta">{i.data.type} · {fmt(i.data.date)}</span>
+            <h3>{i.data.title}</h3>
+            <p>{i.data.summary}</p>
+            <Tags attack={i.data.attack} />
+          </a>
+        ))}
+      </div>
+    ) : <p class="empty">First intelligence write-ups coming soon.</p>}
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Latest hunts</h2><a href="/hunting/">Hunting →</a></div>
+    {hunts.length ? (
+      <div class="grid">
+        {hunts.map((h) => (
+          <a class="card" href={`/hunting/${h.id}/`}>
+            <span class="meta">{h.data.status} · {fmt(h.data.date)}</span>
+            <h3>{h.data.title}</h3>
+            <p>{h.data.hypothesis}</p>
+            <Tags attack={h.data.attack} tags={h.data.languages} />
+          </a>
+        ))}
+      </div>
+    ) : <p class="empty">First hunting queries coming soon.</p>}
+  </section>
+</Base>

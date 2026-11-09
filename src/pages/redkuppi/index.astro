@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import Tags from '../../components/Tags.astro';
+import { getCollection } from 'astro:content';
+import { fmt, published } from '../../utils';
+const episodes = (await getCollection('redkuppi', published)).sort((a, b) => b.data.episode - a.data.episode);
+---
+<Base title="RedKuppi Series" description="RedKuppi: short cyber security and threat intelligence reels.">
+  <p class="eyebrow">Content series</p>
+  <h1>RedKuppi Series</h1>
+  <p class="lead">Short, vertical reels on cyber threats, threat intelligence and security awareness, on LinkedIn, YouTube, TikTok, X and Instagram.</p>
+  <section class="section">
+    {episodes.length ? (
+      <div class="grid">
+        {episodes.map((e) => (
+          <a class="card" href={`/redkuppi/${e.id}/`}>
+            <span class="meta">Episode {e.data.episode} · {fmt(e.data.publishDate)}</span>
+            <h3>{e.data.title}</h3>
+            <p>{e.data.summary}</p>
+            <Tags tags={e.data.tags} />
+          </a>
+        ))}
+      </div>
+    ) : <p class="empty">Episodes coming soon.</p>}
+  </section>
+</Base>

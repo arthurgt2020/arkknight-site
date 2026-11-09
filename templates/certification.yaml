@@ -1,0 +1,5 @@
+name: Certification name
+issuer: Issuer
+date: 2026-01-01
+credentialId: ""
+verifyUrl: https://example.com

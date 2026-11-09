@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { fmt, published } from '../../utils';
+const items = (await getCollection('weekly', published)).sort((a, b) => +b.data.date - +a.data.date);
+---
+<Base title="CTI Weekly Drop" description="Weekly executive threat intelligence by region. Shared at TLP:CLEAR.">
+  <p class="eyebrow">CTI Weekly Drop</p>
+  <h1>CTI Weekly Drop</h1>
+  <p class="lead">Weekly executive threat intelligence by region. Shared at TLP:CLEAR.</p>
+  <section class="section">
+    {items.length ? (
+      <div class="grid">
+        {items.map((i) => (
+          <a class="card" href={`/weekly/${i.id}/`}>
+            <span class="meta">{i.data.region} · {fmt(i.data.periodStart)} – {fmt(i.data.periodEnd)}{i.data.threatLevel && ` · Threat level ${i.data.threatLevel}`}</span>
+            <h3>{i.data.title}</h3>
+            <p>{i.data.summary}</p>
+          </a>
+        ))}
+      </div>
+    ) : <p class="empty">Nothing published yet. Check back soon.</p>}
+  </section>
+</Base>

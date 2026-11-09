@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import Tags from '../../components/Tags.astro';
+import { getCollection } from 'astro:content';
+import { fmt } from '../../utils';
+const items = (await getCollection('projects')).sort((a: any, b: any) => +b.data.date - +a.data.date);
+---
+<Base title="Projects" description="Things I have built: CTI platforms, automation and security tooling.">
+  <p class="eyebrow">Projects</p>
+  <h1>Projects</h1>
+  <p class="lead">Things I have built: CTI platforms, automation and security tooling.</p>
+  <section class="section">
+    {items.length ? (
+      <div class="grid">
+        {items.map((i: any) => (
+          <a class="card" href={`/projects/${i.id}/`}>
+            <span class="meta">{i.data.status}</span>
+            <h3>{i.data.title}</h3>
+            <p>{i.data.summary}</p>
+            <Tags attack={i.data.attack} tags={i.data.tags ?? i.data.languages ?? i.data.stack} />
+          </a>
+        ))}
+      </div>
+    ) : <p class="empty">Nothing published yet. Check back soon.</p>}
+  </section>
+</Base>

@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { fmtMonth, fmt } from '../utils';
+
+const experience = (await getCollection('experience')).sort(
+  (a, b) => b.data.order - a.data.order || +b.data.start - +a.data.start,
+);
+const certs = (await getCollection('certifications')).sort((a, b) => +b.data.date - +a.data.date);
+
+const skills = {
+  'Threat Intelligence': ['Actor profiling', 'Campaign tracking', 'IOC enrichment', 'MITRE ATT&CK mapping', 'Dark web research'],
+  'Threat Hunting & Detection': ['Hypothesis-driven hunting', 'KQL', 'SPL', 'Sigma', 'YARA'],
+  'SOAR & Automation': ['FortiSOAR', 'Playbook engineering', 'Integrations', 'Python'],
+  'AI for Security': ['LLM agents for CTI', 'RAG pipelines', 'Automation workflows'],
+};
+---
+<Base title="About" description="Experience, skills and certifications of Arthur Geo Thomas.">
+  <p class="eyebrow">About</p>
+  <h1>Experience</h1>
+  <p class="lead">5+ years in cyber security, the last 2.5 focused on cyber threat intelligence.</p>
+
+  <section class="section">
+    <ul class="timeline">
+      {experience.map((e) => (
+        <li>
+          <span class="meta">{fmtMonth(e.data.start)} – {e.data.end ? fmtMonth(e.data.end) : 'Present'}{e.data.location && ` · ${e.data.location}`}</span>
+          <h3 style="margin:.2rem 0">{e.data.role} · {e.data.company}</h3>
+          <ul>{e.data.highlights.map((h) => <li>{h}</li>)}</ul>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Skills</h2></div>
+    <div class="grid">
+      {Object.entries(skills).map(([group, items]) => (
+        <div class="card">
+          <h3>{group}</h3>
+          <div class="tags">{items.map((s) => <span class="tag">{s}</span>)}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Certifications</h2></div>
+    {certs.length ? (
+      <div class="grid">
+        {certs.map((c) => (
+          <div class="card">
+            <h3>{c.data.name}</h3>
+            <p>{c.data.issuer} · {c.data.date.getUTCFullYear()}</p>
+            {c.data.verifyUrl && <a href={c.data.verifyUrl} target="_blank" rel="noopener">Verify →</a>}
+          </div>
+        ))}
+      </div>
+    ) : <p class="empty">Certifications coming soon.</p>}
+  </section>
+</Base>
