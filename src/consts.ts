@@ -17,7 +17,7 @@ export const NAV = [
   { href: '/intel/', label: 'Intel' },
   { href: '/hunting/', label: 'Hunting' },
   { href: '/weekly/', label: 'CTI Weekly' },
-  { href: '/research/', label: 'Actor Research' },
+  { href: '/research/', label: 'Threat Actor Research' },
   { href: '/blog/', label: 'Blog' },
   { href: '/redkuppi/', label: 'RedKuppi' },
 ];
