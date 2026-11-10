@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import RiskMatrix from '../../components/RiskMatrix.astro';
 import Tags from '../../components/Tags.astro';
 import { getCollection, render } from 'astro:content';
 import { fmt, published } from '../../utils';
@@ -15,9 +16,14 @@ const d = entry.data;
 <Base title={d.title} description={d.summary ?? d.description ?? d.hypothesis}>
   <article class="prose">
     <p class="eyebrow"><a href="/intel/">← intel</a></p>
-    <h1>{d.title}</h1>
-    <p class="meta">{d.type} · TLP:{d.tlp} · {fmt(d.date)}{d.actor && ` · ${d.actor}`}{d.risk && ` · Risk ${d.risk.likelihood * d.risk.impact}/25 (L${d.risk.likelihood} × I${d.risk.impact})`}</p>
-    <Tags attack={d.attack} tags={d.tags ?? d.languages ?? d.stack} />
+    <div class={d.risk ? 'with-matrix' : undefined}>
+      <div>
+        <h1>{d.title}</h1>
+        <p class="meta">{d.type} · TLP:{d.tlp} · {fmt(d.date)}{d.actor && ` · ${d.actor}`}</p>
+        <Tags attack={d.attack} tags={d.tags ?? d.languages ?? d.stack} />
+      </div>
+      {d.risk && <RiskMatrix likelihood={d.risk.likelihood} impact={d.risk.impact} compact />}
+    </div>
     <Content />
   </article>
 </Base>
