@@ -1,6 +1,6 @@
 export const SITE = {
   title: 'Arthur T.',
-  brand: 'arkknight',
+  brand: 'Arkknight',
   description:
     'Senior Threat Intelligence Analyst — threat intelligence, threat hunting, SOAR automation and the RedKuppi Series.',
   url: 'https://arkknight.si',
