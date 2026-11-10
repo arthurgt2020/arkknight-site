@@ -1,0 +1,25 @@
+---
+// 5×5 risk matrix as drawn on the Intel Drop graphics: likelihood on the vertical axis
+// (5 at the top), impact on the horizontal axis, and the scored cell lit.
+interface Props { likelihood: number; impact: number; compact?: boolean }
+const { likelihood, impact, compact = false } = Astro.props;
+const score = likelihood * impact;
+const band = (s: number) => (s >= 16 ? 'critical' : s >= 10 ? 'high' : s >= 5 ? 'medium' : 'low');
+const rating = band(score);
+const rows = [5, 4, 3, 2, 1];
+const cols = [1, 2, 3, 4, 5];
+---
+<div class:list={['matrix', { compact }]}>
+  <p class="matrix-score">
+    <span class="matrix-label">Risk</span>
+    <strong>{score}<small>/25</small></strong>
+    <span class:list={['matrix-rating', rating]}>{rating}</span>
+  </p>
+  <div class="matrix-grid" role="img" aria-label={`Risk matrix: likelihood ${likelihood} of 5, impact ${impact} of 5, score ${score} of 25, ${rating}`}>
+    {rows.map((l, r) => cols.map((i, c) => {
+      const on = l === likelihood && i === impact;
+      return <span class:list={['cell', band(l * i), { on }]} style={`--d:${(r + c) * 45}ms`}>{on ? score : ''}</span>;
+    }))}
+  </div>
+  <p class="matrix-axes">Likelihood {likelihood} × Impact {impact}</p>
+</div>
