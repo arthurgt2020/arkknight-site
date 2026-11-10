@@ -1,5 +1,5 @@
 export const SITE = {
-  title: 'Arthur Geo Thomas',
+  title: 'Arthur T.',
   brand: 'arkknight',
   description:
     'Senior Threat Intelligence Analyst — threat intelligence, threat hunting, SOAR automation and the RedKuppi Series.',

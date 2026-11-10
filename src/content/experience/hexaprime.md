@@ -2,7 +2,7 @@
 company: HexaPrime Technology (MSSP)
 role: Senior Threat Intelligence Analyst
 start: 2023-06-01
-location: Dubai, UAE
+location: UAE
 order: 3
 highlights:
   - Produce tactical, operational and strategic threat-intelligence advisories on Iran-nexus APTs, hacktivist clusters, ransomware affiliates and dark-web data brokers, graded TLP:AMBER and above for CISO and operational distribution

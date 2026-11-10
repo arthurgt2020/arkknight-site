@@ -38,7 +38,7 @@ Allow-list .pth files by prevalence; scope exposure first. Treat any hit as live
 // =====================================================================
 // HUNT DROP #05 | LiteLLM 1.107.0 startup-hook stealer (PRIVCOLLECT)
 // Builds on Intel Drop #13 | Microsoft Defender XDR - Advanced Hunting (KQL)
-// Author: Arthur Thomas (draft) | TLP:CLEAR
+// Author: Arthur T. (draft) | TLP:CLEAR
 // STATUS: UNTESTED in a live tenant. Run as hunts first; test and tune
 //         before promoting anything to a custom detection rule.
 // Window: 14 days by default (covers the 21 Oct 2026 exposure window).
@@ -184,7 +184,7 @@ union
 // =====================================================================
 // HUNT DROP #05 | LiteLLM 1.107.0 startup-hook stealer (PRIVCOLLECT)
 // Builds on Intel Drop #13 | CrowdStrike Falcon - CQL (NG-SIEM / Advanced Event Search)
-// Author: Arthur Thomas (draft) | TLP:CLEAR
+// Author: Arthur T. (draft) | TLP:CLEAR
 // STATUS: UNTESTED in a live tenant. Run as hunts first; test and tune
 //         before promoting anything to a custom IOA / correlation rule.
 // TIME PICKER: set to "Last 14 days" for every query below.

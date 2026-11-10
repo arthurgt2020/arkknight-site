@@ -38,7 +38,7 @@ Baseline Concurrent Manager host programs per server and allow-list exact comman
 // =====================================================================
 // HUNT DROP #07 | Oracle EBS CVE-2026-101767 (TCF servlet SQLi -> RCE)
 // Builds on Intel Drop #21 | Microsoft Defender XDR Advanced Hunting
-// Author: Arthur Thomas (draft) | TLP:CLEAR
+// Author: Arthur T. (draft) | TLP:CLEAR
 // STATUS: UNTESTED in a live tenant. Test and tune before any use as a
 // detection. Requires Defender for Endpoint P2 sensors on the Linux EBS
 // application-tier hosts (no sensor = no telemetry = no result).
@@ -150,7 +150,7 @@ DeviceNetworkEvents
 // =====================================================================
 // HUNT DROP #07 | Oracle EBS CVE-2026-101767 (TCF servlet SQLi -> RCE)
 // Builds on Intel Drop #21 | CrowdStrike Falcon CQL (NG-SIEM / Advanced Event Search)
-// Author: Arthur Thomas (draft) | TLP:CLEAR
+// Author: Arthur T. (draft) | TLP:CLEAR
 // STATUS: UNTESTED in a live tenant. Test and tune before any use as a
 // detection. Requires Falcon Insight sensors on the Linux EBS app-tier hosts.
 // TIME PICKER: set to Last 14 days for every query below.

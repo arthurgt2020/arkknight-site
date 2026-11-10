@@ -37,7 +37,7 @@ On a hit: confirm the chat with the user, isolate the host, scope LDAP activity 
 // =====================================================================
 // HUNT DROP #06 | Fake "IT Support" in Teams external chat -> Quick Assist/RMM -> PowerShell/MSI -> pythonw implant
 // Builds on Intel Drop #15 | Microsoft Defender XDR Advanced Hunting (KQL)
-// Author: Arthur Thomas (draft) | TLP:CLEAR | Drafted 2026-10-28
+// Author: Arthur T. (draft) | TLP:CLEAR | Drafted 2026-10-28
 // STATUS: UNTESTED in a live tenant. These are HUNTS. Test and tune in a lab/tenant before any use;
 //         tuned versions may later be promoted to custom detection rules (see notes in the .md).
 // Default window: 14 days (Timestamp > ago(14d)).
@@ -207,7 +207,7 @@ DeviceProcessEvents
 // =====================================================================
 // HUNT DROP #06 | Fake "IT Support" in Teams external chat -> Quick Assist/RMM -> PowerShell/MSI -> pythonw implant
 // Builds on Intel Drop #15 | CrowdStrike Falcon (CQL) - Next-Gen SIEM / Advanced Event Search
-// Author: Arthur Thomas (draft) | TLP:CLEAR | Drafted 2026-10-28
+// Author: Arthur T. (draft) | TLP:CLEAR | Drafted 2026-10-28
 // STATUS: UNTESTED in a live tenant. These are HUNTS. Test and tune before any use; tuned versions may later be
 //         promoted to a custom IOA / correlation rule (see notes in the .md).
 // TIME PICKER: set to Last 14 days for every query below.
