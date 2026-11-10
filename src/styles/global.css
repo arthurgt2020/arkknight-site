@@ -80,8 +80,10 @@ h3 { font-weight: 600; }
 
 /* ---------- home hero: intro beside the latest drop's risk matrix ---------- */
 .hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2.5rem; align-items: center; padding-bottom: 1rem; }
-.hero-latest { display: block; color: inherit; padding: 1.2rem; border: 1px solid var(--line-hi); background: rgba(17, 11, 12, .8); clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%); transition: border-color .15s; }
-.hero-latest:hover { color: inherit; border-color: var(--red); }
+.hero-latest { --edge: var(--line-hi); position: relative; display: block; color: inherit; padding: 1.2rem; border: 1px solid var(--edge); background: rgba(17, 11, 12, .8); clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%); transition: border-color .15s; }
+/* clip-path removes the border along the cut corner, so draw that diagonal edge back in, just inside the cut */
+.hero-latest::after { content: ''; position: absolute; top: -1px; right: -1px; width: var(--cut); height: var(--cut); pointer-events: none; background: linear-gradient(to bottom left, transparent 50%, var(--edge) 50%, var(--edge) calc(50% + 1.5px), transparent calc(50% + 1.5px)); }
+.hero-latest:hover { --edge: var(--red); color: inherit; }
 .hero-latest .caption { margin: .9rem 0 0; max-width: 250px; font-family: var(--display); font-weight: 600; line-height: 1.3; color: #fff; }
 .hero-latest .caption span { display: block; font-family: var(--body); font-weight: 400; font-size: .85rem; color: var(--ash); margin-bottom: .2rem; }
 
