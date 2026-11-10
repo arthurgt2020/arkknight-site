@@ -28,7 +28,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   <body>
     <header class="site-header">
       <div class="container">
-        <a class="brand" href="/">ark<span>knight</span></a>
+        <a class="brand" href="/">Ark<span>knight</span></a>
         <nav aria-label="Main">
           {NAV.map((n) => (
             <a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
