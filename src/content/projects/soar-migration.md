@@ -1,6 +1,6 @@
 ---
 title: SOAR Platform Development
-summary: Migrated a security operations center from D3 to FortiSOAR — deployment, configuration and playbook rebuild.
+summary: Developed a FortiSOAR platform for a security operations center, replacing D3 — deployment, configuration and playbook development.
 stack: [FortiSOAR, SOAR, Python]
 featured: true
 status: completed
