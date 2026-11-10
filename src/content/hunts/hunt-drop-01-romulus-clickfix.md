@@ -53,7 +53,7 @@ Defender KQL and Falcon CQL hunts are in the comments (each H1 spans Part 1 + Pa
 //            at a time in Advanced Hunting.
 // NOTE     : Flag regexes accept "-", "/" and the en/em/horizontal-bar dashes
 //            that PowerShell also accepts (Sigma "windash" equivalent).
-// Author   : Arthur Thomas (draft) | TLP:CLEAR
+// Author   : Arthur T. (draft) | TLP:CLEAR
 // =====================================================================
 
 

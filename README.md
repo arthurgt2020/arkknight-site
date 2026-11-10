@@ -1,6 +1,6 @@
 # arkknight.si
 
-Personal site of **Arthur Geo Thomas**: portfolio, threat intelligence, threat hunting, blog and the RedKuppi Series.
+Personal site of **Arthur T.**: portfolio, threat intelligence, threat hunting, blog and the RedKuppi Series.
 
 Built with [Astro](https://astro.build), hosted on GitHub Pages, DNS on Cloudflare.
 
