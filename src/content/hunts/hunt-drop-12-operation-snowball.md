@@ -46,8 +46,6 @@ Allow-list SCCM, Intune and RMM PowerShell by parent and command-line prefix. Ba
 
 ## Microsoft Defender (KQL)
 
-Untested: run as hunts and tune before use as detections.
-
 ```kql
 // H1 WMI → hidden/encoded PowerShell relay (T1047, T1059.001)
 DeviceProcessEvents
@@ -74,8 +72,6 @@ DeviceProcessEvents
 
 ## CrowdStrike Falcon (CQL)
 
-Untested: set the time picker to 14 days and tune before use. The port-21 relay and `sudo vi` hunts are in the full pack.
-
 ```
 // H1 WMI → hidden/encoded PowerShell relay (T1047, T1059.001)
 #event_simpleName=ProcessRollup2 event_platform=Win
@@ -94,6 +90,8 @@ Untested: set the time picker to 14 days and tune before use. The port-21 relay 
 
 // H2 (port-21 relay, selfJoinFilter) and the sudo vi hunt are in the full pack.
 ```
+
+Both query sets are untested: run them as hunts over 14 days (set the Falcon time picker) and tune before using them as detections.
 
 ## Sources
 
