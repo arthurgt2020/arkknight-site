@@ -14,7 +14,7 @@ export const NAV = [
   { href: '/', label: 'Home' },
   { href: '/about/', label: 'About' },
   { href: '/projects/', label: 'Projects' },
-  { href: '/intel/', label: 'Intel Drop' },
+  { href: '/intel/', label: 'Threat Intel Drop' },
   { href: '/hunting/', label: 'Threat Hunting Drop' },
   { href: '/weekly/', label: 'CTI Threat Landscape' },
   { href: '/research/', label: 'Threat Actor Research' },
