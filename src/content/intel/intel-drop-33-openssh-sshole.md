@@ -14,6 +14,8 @@ date: 2026-11-08
 
 **CVE-2026-123158** · CVSS 8.1 · affects OpenSSH on musl libc with PAM disabled (for example Alpine).
 
+Companion hunt: [Hunt Drop 11](/hunting/hunt-drop-11-sshole-root-logins/).
+
 ## Attack chain
 
 1. **Password authentication exposed** (T1021.004). An account that has a `*` hash alongside one real hash.
